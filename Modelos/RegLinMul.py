@@ -1,23 +1,15 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*
 import os
-import Pmw
-import tkFont
-import Tkinter
-from numpy import *
-from Tkinter import *
-import Tkinter as tk
+import Pmw 
+import tkinter as tk
+from tkinter import *
 import numpy as np
-from StringIO import StringIO 
 import matplotlib.pyplot as grafico
-import tkFileDialog
-import math
 from scipy.stats import norm
 from scipy.stats import t
-from RLM import*
-from RLS1 import*
-from Archivo import*
-
+import math
+from ArchivoPy3 import *
 #from AppShell import*
 m,n,data=leerArchivo()
 matT=[]
@@ -28,14 +20,14 @@ mmultTB=[]
 
 
 def fRegLinMulti(m,n,data):#promedio movil simple
-    x=array(data)#Archivo leido de texto convertido a array
-    vy=array(m[0:1]) # vector variable explicada
+    x=[data]#[Archivo leido de texto convertido a array
+    vy=[m[0:1]] # vector variable explicada
     y=np.transpose(vy)#transapuesa variable explicad
     root = Tk()
     root.geometry("800x800+800+200")
     root.config(bg="orange2")
-    Pmw.initialise()
-    nb = Pmw.NoteBook(root)
+    nb=Pmw.initialise()
+    nb = Pmw.NoteBook()
     p1 = nb.add('Analissi Preliminar')
     p2 = nb.add('Ajuste del Modelo')
     p5 = nb.add('Bondad de Ajuste2')
@@ -246,7 +238,7 @@ def fRegLinMulti(m,n,data):#promedio movil simple
         vxe= [num for elem in xt for num in elem]
         
         vyx  = [(i,j)for (i,j) in zip(vye,vxe)]
-        print vyx
+        print(vyx)
         for x,y in vyx:
             x = 100 + 3*x
             y = 250 - (4*y)/5
@@ -321,7 +313,7 @@ def fRegLinMulti(m,n,data):#promedio movil simple
     v3.pack(fill=BOTH, expand=1) 
     
     
-    v5 = Canvas(p5)# bg='gray30'
+    v5 = Canvas(p5,master, width=200, height=100)# bg='gray30'
     w = v5.winfo_reqwidth()
     h = v5.winfo_reqheight()
     fRLM1(m,n)

@@ -1,12 +1,11 @@
 from numpy import linalg
-from numpy import *
-from Tkinter import *
-import Tkinter as tk
+from tkinter import *
+import tkinter as tk
 import numpy as np
 import scipy.stats as st
-from StringIO import StringIO
-import tkFileDialog
-from Archivo import*
+from io import StringIO
+from tkinter import filedialog
+from ArchivoPy3 import*
 
 vec=[];vy=[];vyt=[]
 mat=[]
@@ -103,22 +102,22 @@ def fMatriVects(m,n,data):
                        for k in range(len(IxTxxyT[0])):
                          xIxTxxyT[i][k]+=(x[i][j]*IxTxxyT[j][k])
     
-    print"IxTxxyT=",IxTxxyT
+    print("IxTxxyT=",IxTxxyT)
     
     return x,xT,xTx,xTxInv,xyT,IxTxxyT,xIxTxxyT,prom
 
 def fReglinMul():
     x,xT,xTx,xTxInv,xyT,IxTxxyT=fMatriVects(m, n, data)
     k=0
-    print "Y=",  
+    print ("Y=",",")  
     for i in range(len(xyT)):
         if i==0:
-            print  round( IxTxxyT[i][k],1),"+",
+            print ( round( IxTxxyT[i][k],1),"+",)
         else:
             if  i==len(IxTxxyT)-1:
-                print  IxTxxyT[i][k],"X"
+                print ( IxTxxyT[i][k],"X")
             else:
-                print  IxTxxyT[i][k],"X +",
+                print  (IxTxxyT[i][k],"X +",",")
     #print "B=",B
 
     return 
@@ -136,9 +135,9 @@ def fSCT(m,n):
 
 def fSCR(m,n,data):
 
-    x,xT,xTx,xTxInv,xyT,IxTxxyT,xIxTxxyT,prom=fMatriVects(m,n,data)
-    yDD=array([(i-prom) for (i) in zip(xIxTxxyT)])
-    yD=array([(i*j) for (i,j) in zip(yDD,yDD)])
+    xIxTxxyT,prom=fMatriVects(m,n,data)
+    yDD=[(i-prom) for (i) in zip(xIxTxxyT)]
+    yD=[(i*j) for (i,j) in zip(yDD,yDD)]
     SCR=yD.sum()   
     return SCR
     
@@ -146,8 +145,8 @@ def fSCE(m,n):
     vy=array(m[0:1]) # vector variable explicada
     y=transpose(vy)#t
     x,xT,xTx,xTxInv,xyT,IxTxxyT,xIxTxxyT,prom=fMatriVects(m,n,data)
-    yyP=array([round((i-j),2) for (i,j) in zip(y,xIxTxxyT)])
-    yP=array([(i*j) for (i,j) in zip(yyP,yyP)]) 
+    yyP=[round((i-j),2) for (i,j) in zip(y,xIxTxxyT)]
+    yP=[[(i*j) for (i,j) in zip(yyP,yyP)]] 
     SCE=yP.sum()
     return SCE
 
@@ -162,16 +161,17 @@ def fAnova(m,n):
     Fc=MSE/S2
     rc=1-(SCE/SCT)
     rcA=1-((SCE/(n-(w-1)-1))/(SCT/(n-1)))
-    print"Anova=",SCT,SCR,SCE,MSE,S2,Fc
-    print "rc)",rc
-    print "w=",w
-    print "rcA=",rcA
+    print("Anova=",SCT,SCR,SCE,MSE,S2,Fc)
+    print( "rc)",rc)
+    print( "w=",w)
+    print ("rcA=",rcA)
     #div=SSR/S2
     #print"Anova=",SCT, SCR,SCE,MSE,S2,Fc
     return SCT# SCR,SCE,MSE,S2,Fc
 
 m,n,data=leerArchivo()
-fAnova(m,n)
+fSCR(m,n,data)
+#fAnova(m,n)
 #fMatrices(m,n,data)
 #fRlm(m,n,data)
 #fAnova(m,n)

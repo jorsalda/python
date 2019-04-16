@@ -2,16 +2,17 @@
 #-*- coding: utf-8 -*
 import os
 import Pmw
-import tkFont
-import Tkinter
+from tkinter import font
+import tkinter as tk
+import tkinter
 from numpy import *
-from Tkinter import *
-import Tkinter as tk
+from tkinter import *
 import numpy as np
-from StringIO import StringIO
+from io import StringIO
+from tkinter import filedialog
 import matplotlib.pyplot as grafico
-import tkFileDialog
-from Archivo import*
+from ArchivoPy3 import*
+#import ArchivoPy3 as archivo
 from RLS1 import*
 from INTCONFI import*
 from RegLinSimp1 import*
@@ -119,7 +120,7 @@ def RLS(m,n):#Regresion lienal simple
 def RLM(m,n,data):#Regresion Lienal Multiple
     fRegLinMulti(m,n,data)
 def InterConfi(m,n):#Intervalos de confinaza
-    print "endn"
+    print ("endn")
 
 def PMS(m,n):#promedio movil simple
     fInterConfi(m,n)

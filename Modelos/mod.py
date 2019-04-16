@@ -262,7 +262,7 @@ def RLM(m,n):
     
     
     def uno():
-        print"JORGE SALDARRIGA!"
+        print("JORGE SALDARRIGA!")
    
     menu2 = Menu(v1)
     v1.config(menu=menu2)
